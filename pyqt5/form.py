@@ -10,35 +10,30 @@ class MainWindow(qtw.QWidget):
         self.setWindowTitle("Hello World!!")
 
         #set  vertical layout
-        self.setLayout(qtw.QVBoxLayout())
+        # self.setLayout(qtw.QVBoxLayout())
+        # set form layout
+        form_layout= qtw.QFormLayout()
+        self.setLayout(form_layout)
 
-        #create a label
-        my_label = qtw.QLabel("Pick something from the list")
-        
-        #change the font size of label
-        my_label.setFont(qtg.QFont('Helvetica',18))
-        self.layout().addWidget(my_label)
+        # add our widgets
+        label_one = qtw.QLabel("This is a cool label row")
+        label_one.setFont(qtg.QFont("Helvetica", 18))
 
-        #create an spin box
-        my_spin = qtw.QSpinBox(self,
-            value=10,
-            maximum=200, 
-            minimum=0,
-            singleStep=5)
-        #put spinbox on the screen
-        self.layout().addWidget(my_spin)
+        f_name = qtw.QLineEdit(self)
+        l_name = qtw.QLineEdit(self)
 
-        #creat a button
-        my_button = qtw.QPushButton("Press Me!",
-            clicked = lambda: press_it())
-        self.layout().addWidget(my_button)
-        
+        # add rows to app 
+        form_layout.addRow(label_one)
+        form_layout.addRow("First Name", f_name)
+        form_layout.addRow("Last Name", l_name)
+        form_layout.addRow(qtw.QPushButton("Press Me!", clicked = lambda:press_it()))
+
         #show the app
         self.show()
 
         def press_it():
             #add name to label
-            my_label.setText(f'You picked {my_spin.value()}!') #currentText reference the first, Currentdata reference the sencond, Currentindex refernce the index number of the item 
+            label_one.setText(f'You clicked the button, {f_name.text()} {l_name.text()}!') #currentText reference the first, Currentdata reference the sencond, Currentindex refernce the index number of the item 
 
             
 
